@@ -54,6 +54,14 @@
                         StaticMenuStyle-CssClass="nav navbar-nav" StaticSelectedStyle-CssClass="active"
                         DynamicMenuStyle-CssClass="dropdown-menu" EnableViewState="false" EnableTheming="false">
                     </asp:Menu>
+                    <script>
+                        /* Remove float styling that was injected for the menu control */
+
+                        $(function () {
+                            // Isolate the context for applying Bootstrap styling
+                            $('#SiteNav').next().removeAttr('style');
+                        });
+                    </script>
                     <asp:SiteMapDataSource ID="SiteNavDataSource" runat="server"
                         ShowStartingNode="false" />
                     <%--<ul class="nav navbar-nav">
