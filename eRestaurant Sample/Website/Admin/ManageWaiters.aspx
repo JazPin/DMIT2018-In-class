@@ -4,6 +4,6 @@
     <div class="row col-md-12">
         <h1>Manage Waiters</h1>
     </div>
-    
+       
 </asp:Content>
 
