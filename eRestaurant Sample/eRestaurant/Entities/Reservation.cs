@@ -15,6 +15,10 @@ namespace eRestaurant.Entities
         public string ContactPhone { get; set; }
         public string ReservationStatus { get; set; }
         public string EventCode { get; set; }
-        
+
+        #region Navigation  properties
+        public virtual SpecialEvent Event { get; set; }
+        public virtual ICollection<Table> Tables { get; set; }
+        #endregion
     }
 }
