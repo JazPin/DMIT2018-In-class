@@ -18,6 +18,7 @@ namespace eRestaurant.Entities
         public bool Available { get; set; }
 
         #region Navigation  properties
+        public virtual ICollection<Bill> Bills { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
         #endregion
     }
