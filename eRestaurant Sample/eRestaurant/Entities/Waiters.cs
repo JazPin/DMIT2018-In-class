@@ -15,11 +15,11 @@ namespace eRestaurant.Entities
         public string Phone { get; set; }
         public string Address { get; set; }
         public DateTime HireDate { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
-
+        
         #region Navigation  properties
         public virtual ICollection<Bill> Bills { get; set; }
         #endregion
