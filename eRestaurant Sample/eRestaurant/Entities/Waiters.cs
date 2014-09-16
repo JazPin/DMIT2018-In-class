@@ -17,7 +17,7 @@ namespace eRestaurant.Entities
         public DateTime ReleaseDate { get; set; }
 
         #region Navigation  properties
-        public virtual ICollection<Bills> Bills { get; set; }
+        public virtual ICollection<Bill> Bills { get; set; }
         #endregion
     }
 }

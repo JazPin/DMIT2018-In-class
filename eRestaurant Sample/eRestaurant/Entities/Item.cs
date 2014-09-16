@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.Entities
 {
-    public class Items
+    public class Item
     {
+        public Item()
+        {
+            Active = true;
+        }
+
         public int ItemID { get; set; }
         public string Description { get; set; }
         public decimal CurrentPrice { get; set; }
@@ -19,7 +24,7 @@ namespace eRestaurant.Entities
 
         #region Navigation  properties
         public virtual MenuCategories MenuCategory{ get; set; }
-        public virtual ICollection<BillItems> BillItems { get; set; }
+        public virtual ICollection<BillItem> BillItems { get; set; }
         #endregion
     }
 }
