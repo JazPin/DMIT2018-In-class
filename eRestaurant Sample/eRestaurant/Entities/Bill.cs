@@ -20,7 +20,7 @@ namespace eRestaurant.Entities
         public string Comment { get; set; }
 
         #region Navigation  properties
-        public virtual Waiters Waiter { get; set; }
+        public virtual Waiter Waiter { get; set; }
         public virtual Reservation Reservation { get; set; }
         public virtual Table Table{ get; set; }
         public virtual ICollection<BillItem> BillItems { get; set; }

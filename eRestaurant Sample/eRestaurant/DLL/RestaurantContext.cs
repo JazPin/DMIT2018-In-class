@@ -21,7 +21,7 @@ namespace eRestaurant.DLL
         public DbSet<BillItem> BillItems { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<MenuCategories> MenuCategories { get; set; }
-        public DbSet<Waiters> Waiters { get; set; }
+        public DbSet<Waiter> Waiters { get; set; }
         #endregion
 
         #region Override OnModelCreating

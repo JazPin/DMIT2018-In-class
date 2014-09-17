@@ -1,4 +1,5 @@
-﻿using eRestaurant.Entities;
+﻿using eRestaurant.DLL;
+using eRestaurant.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,43 @@ namespace eRestaurant.BLL
     {
         #region Manage Waiters
         #region Command
-        public int AddWaiter(Waiters item)
+        public int AddWaiter(Waiter item)
         {
-            throw new NotImplementedException();
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                // Validation of waiter data
+                var added = context.Waiters.Add(item);
+                context.SaveChanges();
+                return added.WaiterID;
+            }
         }
-        public void UpdateWaiter(Waiters item)
+        public void UpdateWaiter(Waiter item)
         {
-
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                // Validation
+                var attatched = context.Waiters.Attach(item);
+                var matchingWithExistingValues = context.Entry<Waiter>(attatched); // Lookup info about a object in the database
+                matchingWithExistingValues.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
-        public void DeleteWaiter(Waiters item)
+        public void DeleteWaiter(Waiter item)
         {
-
+            using (RestaurantContext context = new RestaurantContext())
+            {
+                var existing = context.Waiters.Find(item.WaiterID);
+                context.Waiters.Remove(existing);
+                context.SaveChanges();
+            }
         }
         #endregion
         #region Query
-        public List<Waiters> ListAllWaiters()
+        public List<Waiter> ListAllWaiters()
         {
             throw new NotImplementedException();
         }
-        public Waiters GetWaiter(int waiterId)
+        public Waiter GetWaiter(int waiterId)
         {
             throw new NotImplementedException();
         }
