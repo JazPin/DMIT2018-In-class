@@ -23,7 +23,7 @@ namespace eRestaurant.Entities
         public int MenuCategoryID { get; set; }
 
         #region Navigation  properties
-        public virtual MenuCategories MenuCategory{ get; set; }
+        public virtual MenuCategory MenuCategory{ get; set; }
         public virtual ICollection<BillItem> BillItems { get; set; }
         #endregion
     }

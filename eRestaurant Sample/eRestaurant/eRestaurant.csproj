@@ -51,7 +51,7 @@
     <Compile Include="Entities\BillItem.cs" />
     <Compile Include="Entities\Bill.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\MenuCategories.cs" />
+    <Compile Include="Entities\MenuCategory.cs" />
     <Compile Include="Entities\Reservation.cs" />
     <Compile Include="Entities\SpecialEvent.cs" />
     <Compile Include="Entities\Table.cs" />

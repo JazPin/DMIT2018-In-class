@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace eRestaurant.Entities
 {
-    public class MenuCategories
+    public class MenuCategory
     {
         public int MenuCategoryID { get; set; }
         public string Description { get; set; }
 
 
         #region Navigation  properties
-        public virtual ICollection<Bill> Bills { get; set; }
+        public virtual ICollection<Item> MenuItems { get; set; }
         #endregion
     }
 }
