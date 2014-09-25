@@ -30,3 +30,19 @@ var shortList = from person in names
 				select person;
 shortList.Dump();				
 
+/* Example 3: Querying Find the most recent Bill and its total */
+// Get All Bills that have been placed
+var allBills =  from item in Bills
+				where item.OrderPlaced.HasValue
+				select new 	//declaring an "annonymous type" on-the-fly
+				{ 			// using an init list to set the properties
+					BillDate = item.BillDate,
+					IsReady = item.OrderReady
+				};
+
+allBills.Count().Dump(); // show the count of items
+allBills.Take(5).Dump(); // show the first 5 bills
+
+
+
+
