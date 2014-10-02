@@ -9,6 +9,6 @@ namespace eRestaurant.Entities.DTOs
     public class Category
     {
         public string Description { get; set; }
-        public IEnumerable<MenuItem> MenuItem { get; set; }
+        public IEnumerable<MenuItem> MenuItems { get; set; }
     }
 }
