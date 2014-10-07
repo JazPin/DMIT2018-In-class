@@ -32,7 +32,7 @@
                                 <span class="badge"><%# Eval("Calories") %>Calories</span>
                                 <%#((decimal)Eval("Price")).ToString("C") %>
                             </h4>
-                            
+
                             
                             <%# Eval ("Comment") %>
                         </div>
