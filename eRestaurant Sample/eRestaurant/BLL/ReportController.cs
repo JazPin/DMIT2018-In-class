@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace eRestaurant.BLL
 {
     [DataObject]
@@ -27,6 +28,25 @@ namespace eRestaurant.BLL
                                  Calories = cat.Calories,
                                  Comment = cat.Comment
                              };
+                return results.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<CategorizedItemSale> TotalCategorizedItemSales()
+        {
+            using(var context = new RestaurantContext())
+            {
+                var results = from info in context.BillItems
+                              orderby info.Item.MenuCategory.Description, info.Item.Description
+                              select new CategorizedItemSale()
+                              {
+                                  CategoryDescription = info.Item.MenuCategory.Description,
+                                  ItemDescription = info.Item.Description,
+                                  Quantity = info.Quantity,
+                                  Price = info.Saleprice,
+                                  Cost = info.UnitCost
+                              };
                 return results.ToList();
             }
         }
