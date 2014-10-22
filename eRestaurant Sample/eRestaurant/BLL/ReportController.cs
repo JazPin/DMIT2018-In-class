@@ -44,8 +44,8 @@ namespace eRestaurant.BLL
                                   CategoryDescription = info.Item.MenuCategory.Description,
                                   ItemDescription = info.Item.Description,
                                   Quantity = info.Quantity,
-                                  Price = info.Saleprice,
-                                  Cost = info.UnitCost
+                                  Price = info.Saleprice * info.Quantity,
+                                  Cost = info.UnitCost * info.Quantity
                               };
                 return results.ToList();
             }
