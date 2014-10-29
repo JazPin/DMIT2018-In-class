@@ -1,6 +1,6 @@
 <Query Kind="Statements">
   <Connection>
-    <ID>e89cc6f2-6070-41c8-9265-4b6de6b0131d</ID>
+    <ID>1de21bbc-1a66-44db-98db-b4477358aee3</ID>
     <Persist>true</Persist>
     <Server>.</Server>
     <Database>eRestaurant</Database>
@@ -50,7 +50,13 @@ var step2 = from data in step1.ToList() //Tolist() forces the first result set t
 				Table = data.Table,
 				Seating = data.Seating,
 				CommonBilling = from info in data.Bills.Union(data.Reservations)
-								select info
+								select new //info //changed to get only needed info, not entire entity
+								{
+									BillID = info.BillID,
+									BillTotal = info.BillItems.Sum(bi=>bi.Quantity*bi.SalePrice),
+									Waiter = info.Waiter.FirstName,
+									Reservation = info.Reservation
+								}
 			};
 step2.Dump("Step2 of my queries - unioning the result");
 
@@ -79,7 +85,16 @@ var step4 = from data in step3
 				//use a temnary  expression to conditionally get the bill id (if it exists)
 				BillID = 	data.Taken ?					// if (data.Taken)
 							data.CommonBilling.BillID		// value to use if true
-							: (int?) null					// value to use if false
+							: (int?) null,					// value to use if false
+				BillTotal = data.Taken ?
+							data.CommonBilling.BillTotal
+							: (decimal?) null,
+				Waiter = 	data.Taken ?
+							data.CommonBilling.Waiter
+							: (string) null
+				ReservationName = 	data.Taken?
+									(data.CommonBilling.Reservation != null ? 
+									 data.CommonBilling.Reservation.CustomerName : (string) null)
+									:(string)null
 			};
 step4.Dump("Step4 - my final results that I need for the form");
-
