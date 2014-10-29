@@ -8,6 +8,15 @@ namespace eRestaurant.Entities
 {
     public class Reservation
     {
+        //constants for valid reservaiton status values
+        //B = Bookedl; A = Arrived; C = Complete; N = No-show; X = Cancelled
+        public const string Booked = "B";
+        public const string Arrived = "A";
+        public const string Complete = "C";
+        public const string NoShow = "N";
+        public const string Cancelled = "X";
+
+
         public int ReservationID { get; set; }
         public string CustomerName { get; set; }
         public DateTime ReservationDate { get; set; }
