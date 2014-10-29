@@ -91,7 +91,7 @@ var step4 = from data in step3
 							: (decimal?) null,
 				Waiter = 	data.Taken ?
 							data.CommonBilling.Waiter
-							: (string) null
+							: (string) null,
 				ReservationName = 	data.Taken?
 									(data.CommonBilling.Reservation != null ? 
 									 data.CommonBilling.Reservation.CustomerName : (string) null)
