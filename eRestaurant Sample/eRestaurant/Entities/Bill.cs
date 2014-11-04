@@ -10,10 +10,10 @@ namespace eRestaurant.Entities
     {
         public int BillID { get; set; }
         public DateTime BillDate { get; set; }
-        public TimeSpan OrderPlaced { get; set; }
-        public TimeSpan OrderReady { get; set; }
-        public TimeSpan OrderServed { get; set; }
-        public TimeSpan OrderPaid { get; set; }
+        public TimeSpan? OrderPlaced { get; set; }
+        public TimeSpan? OrderReady { get; set; }
+        public TimeSpan? OrderServed { get; set; }
+        public TimeSpan? OrderPaid { get; set; }
         public int NumberInParty { get; set; }
         public bool PaidStatus { get; set; }
         public int WaiterID { get; set; }
