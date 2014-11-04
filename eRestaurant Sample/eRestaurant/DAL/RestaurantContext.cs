@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity; // Needed for accessing my entity classes
 using eRestaurant.Entities; // Needed for DbContext base class
-namespace eRestaurant.DLL
+namespace eRestaurant.DAL
 {
     class RestaurantContext : DbContext 
     {

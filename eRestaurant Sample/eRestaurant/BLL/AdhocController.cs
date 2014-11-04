@@ -1,4 +1,4 @@
-﻿using eRestaurant.DLL;
+﻿using eRestaurant.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
