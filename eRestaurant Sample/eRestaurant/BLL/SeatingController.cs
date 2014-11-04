@@ -4,6 +4,7 @@ using eRestaurant.Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,12 @@ namespace eRestaurant.BLL
                                         where billing.BillDate.Year == date.Year
                                             && billing.BillDate.Month == date.Month
                                             && billing.BillDate.Day == date.Day
-                                            && billing.BillDate.TimeOfDay <= time
+                                            /*   The following won't work in EF to entites - it will return this exception
+                                             *   "The specified type member 'TimeOfDay' is not supported .... "
+                                             * 
+                                             */
+                                            //&& billing.BillDate.TimeOfDay <= time
+                                            && DbFunctions.CreateTime(billing.BillDate.Hour,billing.BillDate.Minute,billing.BillDate.Second) <= time
                                             && (!billing.OrderPaid.HasValue || billing.OrderPaid >= time)
                                         //							&&	(!billing.PaidStatus || billing.OrderPaid >= time)
                                         select billing,
@@ -39,7 +45,8 @@ namespace eRestaurant.BLL
                                                where billing.BillDate.Year == date.Year
                                                    && billing.BillDate.Month == date.Month
                                                    && billing.BillDate.Day == date.Day
-                                                   && billing.BillDate.TimeOfDay <= time
+                                                  // && billing.BillDate.TimeOfDay <= time
+                                                  && DbFunctions.CreateTime(billing.BillDate.Hour, billing.BillDate.Minute, billing.BillDate.Second) <= time
                                                    && (!billing.OrderPaid.HasValue || billing.OrderPaid >= time)
                                                //							&&	(!billing.PaidStatus || billing.OrderPaid >= time)
                                                select billing
@@ -81,7 +88,7 @@ namespace eRestaurant.BLL
 
                 //Step 4: Build out intended seating summary info
                 var step4 = from data in step3
-                            select new // SeatingSummary() //my DTO
+                            select new SeatingSummary() //my DTO
                             {
                                 Table = data.Table,
                                 Seating = data.Seating,
@@ -101,7 +108,7 @@ namespace eRestaurant.BLL
                                                      data.CommonBilling.Reservation.CustomerName : (string)null)
                                                     : (string)null
                             };
-                
+                return step4.ToList();
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select)]
