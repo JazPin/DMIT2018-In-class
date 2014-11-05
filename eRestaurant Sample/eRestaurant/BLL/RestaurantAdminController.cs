@@ -31,7 +31,7 @@ namespace eRestaurant.BLL
             using (RestaurantContext context = new RestaurantContext())
             {
                 // Validation
-                var attatched = context.Waiters.Attach(item);
+                var attatched = context.Waiters.Attach(item); 
                 var matchingWithExistingValues = context.Entry<Waiter>(attatched); // Lookup info about a object in the database
                 matchingWithExistingValues.State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
