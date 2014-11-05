@@ -41,7 +41,7 @@
         </div>
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
 
-        <div class="pull-right col-me-5">
+        <div class="pull-right col-me-4">
             <details open>
                 <summary>Reservation by Date/Time</summary>
                 <h4>Today's Reservations</h4>
@@ -76,7 +76,7 @@
             </details>     
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-8">
             <details open>
                 <summary>Tables</summary>
                 <asp:GridView CssClass="table table-hover table-striped table-condensed" ID="SeatingGridView" runat="server" ItemType="eRestaurant.Entities.DTOs.SeatingSummary" AutoGenerateColumns="False" DataSourceID="SeatingODS">
