@@ -100,9 +100,10 @@
                                     <%--Form to seat walk-in customers--%>
                                     <asp:TextBox ID="NumberInParty" runat="server" CssClass="form-control col-md-1" TextMode="Number" placeholder="# people"></asp:TextBox>
                                     <span class="input-group-addon">
-                                        <asp:DropDownList ID="WaiterList" runat="server" CssClass="selectpicker" AppendDataBoundItems="true">
+                                        <asp:DropDownList ID="WaiterList" runat="server" CssClass="selectpicker" AppendDataBoundItems="true" DataSourceID="WaiterODS" DataTextField="FullName" DataValueField="WaiterID">
                                             <asp:ListItem Value="0">[select a waiter]</asp:ListItem>
                                         </asp:DropDownList>
+                                        <asp:ObjectDataSource runat="server" ID="WaiterODS" OldValuesParameterFormatString="original_{0}" SelectMethod="ListAllWaiters" TypeName="eRestaurant.BLL.RestaurantAdminController"></asp:ObjectDataSource>
                                     </span>
                                     <span class="input-group-addon" style="width:5px; padding:0; border:0; background-color:white;"></span>
                                     <asp:LinkButton ID="Linkbutton1" runat="server" Text="Seat Customers"
