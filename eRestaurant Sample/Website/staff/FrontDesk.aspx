@@ -83,10 +83,15 @@
         <div class="col-md-8">
             <details open>
                 <summary>Tables</summary>
-                <asp:GridView CssClass="table table-hover table-striped table-condensed" ID="SeatingGridView" runat="server" ItemType="eRestaurant.Entities.DTOs.SeatingSummary" AutoGenerateColumns="False" DataSourceID="SeatingODS">
+                <asp:GridView CssClass="table table-hover table-striped table-condensed" OnSelectedIndexChanging="SeatingGridView_SelectedIndexChanging" ID="SeatingGridView" runat="server" ItemType="eRestaurant.Entities.DTOs.SeatingSummary" AutoGenerateColumns="False" DataSourceID="SeatingODS">
                     <Columns>
                         <asp:CheckBoxField DataField="Taken" HeaderText="Taken" SortExpression="Taken" ItemStyle-HorizontalAlign="Center"></asp:CheckBoxField>
-                        <asp:BoundField DataField="Table" HeaderText="Table" SortExpression="Table"></asp:BoundField>
+                        <asp:TemplateField> 
+                            <ItemTemplate>
+                                <asp:Label ID="TableNumber" runat="server" Text="<%# Item.Table %>"/>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <%--<asp:BoundField DataField="Table" HeaderText="Table" SortExpression="Table"></asp:BoundField>--%>
                         <asp:BoundField DataField="Seating" HeaderText="Seating" SortExpression="Seating"></asp:BoundField>
                         <asp:TemplateField>
                             <ItemTemplate>
