@@ -14,7 +14,7 @@
 
         }
     </style>
-    <div class="row col-md-12">
+    <div class="row col-md-13">
         <h1>Front Desk</h1>
 
         <div class="well">
@@ -45,7 +45,7 @@
         </div>
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
 
-        <div class="pull-right col-me-4">
+        <div class="pull-right col-me-6">
             <details open>
                 <summary>Reservation by Date/Time</summary>
                 <h4>Today's Reservations</h4>
@@ -53,7 +53,7 @@
                    <ItemTemplate>
                        <div>
                            <h4><%# Item.SeatingTime  %></h4>
-                           <asp:ListView ID="ReservationSummaryListView" runat="server" ItemType="eRestaurant.Entities.DTOs.ReservationSummary" DataSource="<%# Item.Reservations %>">
+                           <asp:ListView ID="ReservationSummaryListView" runat="server" OnItemCommand="ReservationSummaryListView_OnItemCommand" ItemType="eRestaurant.Entities.DTOs.ReservationSummary" DataSource="<%# Item.Reservations %>">
                                <LayoutTemplate>
                                    <div class="seating">
                                        <span runat="server" id="itemPlaceholder"/>
@@ -65,13 +65,35 @@
                                        <%# Item.NumberInParty %> &mdash;
                                        <%# Item.Status %> &mdash;
                                        PH: 
-                                       <%# Item.Contact %> 
+                                       <%# Item.Contact %> &mdsg;
+                                       <asp:LinkButton ID="InsertButton" runat="server" CommandName="Seat" CommandArgument='<%# Item.ID %>'>Reservation Seating<span class="glyphicon glyphicon-plus"></span></asp:LinkButton>
                                    </div>
                                </ItemTemplate>
                            </asp:ListView>
                        </div>
                    </ItemTemplate>
                 </asp:Repeater>
+                <asp:Panel ID="ReservationSeatingPanel" runat="server" Visible='<%# ShowReservationSeating() %>'>
+                    <asp:DropDownList ID="WaiterDropDownList" runat="server" CssClass="seating"
+                        AppendDataBoundItems="true" DataSourceID="WaitersDataSource"
+                        DataTextField="FullName" DataValueField="WaiterId">
+                        <asp:listitem value="0">[select a waiter]</asp:listitem>
+                    </asp:DropDownList>
+                    <asp:ListBox ID="ReservationTableListBox" runat="server" CssClass="seating"                             
+                        DataSourceID="AvailableSeatingObjectDataSource" SelectionMode="Multiple" Rows="14"
+                        DataTextField="Table" DataValueField="Table">
+                    </asp:ListBox>
+                </asp:Panel>
+                  <%--For the Waiter DropDown--%>
+                    <asp:ObjectDataSource runat="server" ID="WaitersDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="ListAllWaiters" TypeName="eRestaurant.BLL.RestaurantAdminController"></asp:ObjectDataSource>
+    
+                  <%--For the Available Tables DropDown (seating reservation)--%>
+                    <asp:ObjectDataSource runat="server" ID="AvailableSeatingObjectDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="AvailableSeatingByDateTime" TypeName="eRestaurant.BLL.SeatingController">
+                        <selectparameters>
+                        <asp:controlparameter ControlID="SearchDate" PropertyName="Text" name="date" type="DateTime"></asp:controlparameter>
+                        <asp:controlparameter ControlID="SearchTime" PropertyName="Text" dbtype="Time" name="time"></asp:controlparameter>
+                        </selectparameters>
+                    </asp:ObjectDataSource>
                 <asp:ObjectDataSource runat="server" ID="ReservationODS" OldValuesParameterFormatString="original_{0}" SelectMethod="ReservationByTime" TypeName="eRestaurant.BLL.SeatingController">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="SearchDate" PropertyName="Text" Name="date" Type="DateTime"></asp:ControlParameter>
@@ -80,7 +102,7 @@
             </details>     
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <details open>
                 <summary>Tables</summary>
                 <asp:GridView CssClass="table table-hover table-striped table-condensed" OnSelectedIndexChanging="SeatingGridView_SelectedIndexChanging" ID="SeatingGridView" runat="server" ItemType="eRestaurant.Entities.DTOs.SeatingSummary" AutoGenerateColumns="False" DataSourceID="SeatingODS">
@@ -98,7 +120,7 @@
                                 <%--Display either the occupied table details  or a form to seat walk-in  customers--%>
                                 <asp:Panel ID="WalkInSeatingPanel" runat="server" Visible="<%# !Item.Taken %>" CssClass="input-group-addon input-group-sm">
                                     <%--Form to seat walk-in customers--%>
-                                    <asp:TextBox ID="NumberInParty" runat="server" CssClass="form-control col-md-1" TextMode="Number" placeholder="# people"></asp:TextBox>
+                                    <asp:TextBox ID="NumberInParty" runat="server" CssClass="form-control" TextMode="Number" placeholder="# people"></asp:TextBox>
                                     <span class="input-group-addon">
                                         <asp:DropDownList ID="WaiterList" runat="server" CssClass="selectpicker" AppendDataBoundItems="true" DataSourceID="WaiterODS" DataTextField="FullName" DataValueField="WaiterID">
                                             <asp:ListItem Value="0">[select a waiter]</asp:ListItem>
