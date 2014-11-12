@@ -65,7 +65,7 @@
                                        <%# Item.NumberInParty %> &mdash;
                                        <%# Item.Status %> &mdash;
                                        PH: 
-                                       <%# Item.Contact %> &mdsg;
+                                       <%# Item.Contact %> &mdash;
                                        <asp:LinkButton ID="InsertButton" runat="server" CommandName="Seat" CommandArgument='<%# Item.ID %>'>Reservation Seating<span class="glyphicon glyphicon-plus"></span></asp:LinkButton>
                                    </div>
                                </ItemTemplate>
